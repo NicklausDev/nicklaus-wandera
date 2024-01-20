@@ -32,21 +32,75 @@ export default function Shapes(){
 
 function Geometries() {
     const geometries = [
+
+        //pentahedron
         {
-            position: [0,0,0],
+            position: [0, 0, 0],
             r: 0.3,
             geometry: new THREE.IcosahedronGeometry(3),
+        },
+
+        //pill
+        {
+            position: [1, -0.75, 4],
+            r: 0.4,
+            geometry: new THREE.CapsuleGeometry(0.5, 1.6, 2, 16),
+        },
+        
+        //football
+        {
+            position: [-1.4, 2, -4],
+            r: 0.6,
+            geometry: new THREE.DodecahedronGeometry(1.5),
+        },
+
+        //donut
+        {
+            position: [-0.8, -0.75, 5],
+            r: 0.3,
+            geometry: new THREE.TorusGeometry(0.6, 0.25, 16, 32),
+        },
+
+        //diamond
+        {
+            position: [1.6, 1.6, -4],
+            r: 0.3,
+            geometry: new THREE.OctahedronGeometry(1.5),
         }
     ];
 
     const materials = [
-        new THREE.MeshNormalMaterial()
+        //new THREE.MeshNormalMaterial(),
+        new THREE.MeshStandardMaterial({ color: 0x2ecc71, roughness: 0}),
+        new THREE.MeshStandardMaterial({ color: 0xf1c40f, roughness: 0.4}),
+        new THREE.MeshStandardMaterial({ color: 0xe74c3c, roughness: 0.1}),
+        new THREE.MeshStandardMaterial({ color: 0x8e44ad, roughness: 0.3}),
+        new THREE.MeshStandardMaterial({ color: 0x1abc9c, roughness: 0.2}),
+        new THREE.MeshStandardMaterial({ 
+            roughness: 0,
+            metalness: 0.5,
+            color: 0x2980b9,
+        }),
+        new THREE.MeshStandardMaterial({
+            color: 0x2c3e50,
+            roughness: 0.1,
+            metalness: 0.5,
+        })
+    ];
+
+    const soundEffects = [
+        new Audio("/sounds/Glass.ogg"),
+        new Audio("/sounds/Metal.ogg"),
+        new Audio("/sounds/Mining.ogg"),
+        new Audio("/sounds/Soft.ogg"),
+        new Audio("/sounds/Wood.ogg"),
     ]
 
     return geometries.map(({position, r, geometry}) => (
         <Geometry
             key = {JSON.stringify(position)}
             position = {position .map((p) => p*2)}
+            soundEffects = {soundEffects}
             geometry = {geometry}
             materials = {materials}
             r = {r}
@@ -55,7 +109,7 @@ function Geometries() {
     
 }
 
-function Geometry({r, position, geometry, materials}){
+function Geometry({r, position, geometry, materials, soundEffects}){
     const meshRef = useRef()
     const [visible, setVisible] = useState(false)
 
@@ -67,6 +121,8 @@ function Geometry({r, position, geometry, materials}){
 
     function handleClick(e){
         const mesh = e.object;
+
+        gsap.utils.random(soundEffects).play()
 
         gsap.to(mesh.rotation, {
             x: `+=${gsap.utils.random(0,2)}`,

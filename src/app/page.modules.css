@@ -1,0 +1,36 @@
+.main {
+    margin-bottom: 188vh;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.main img {
+    object-fit: contain;
+}
+
+.imageContainer {
+    width: 80vw; /* Adjust the width as needed */
+    height: 80vh; /* Adjust the height as needed */
+  }  
+
+.sliderContainer {
+    top: calc(100vh - 300px);
+}
+
+.slider {
+    white-space: nowrap;
+    display: flex;
+}
+
+.slider p {
+    margin: 0px;
+    color: #fff;
+    font-size: 5vw;
+    font-weight: 600;
+    font-family: Avena;
+}
+
+.slider p:nth-of-type(2) {
+    left: 100%;
+}

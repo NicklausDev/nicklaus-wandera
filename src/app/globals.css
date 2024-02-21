@@ -1,33 +1,39 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  margin: 0px;
+  background-color: #b1b1bf;
+  overflow-x: hidden;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.main {
+  margin-bottom: 188vh;
+  height: 100vh;
+  position: relative;
+}
+
+.main img {
+  object-fit: contain;
+}
+
+.sliderContainer {
+  position: absolute;
+  top: 70vh;
+}
+
+.slider {
+  position: relative;
+  white-space: nowrap;
+  display: flex;
+}
+
+.slider p {
+  margin: 0px;
+  color: #fff;
+  font-size: min(11vw, 170px);
+  font-weight: 600;
+  font-family: 'Aventa', Helvetica;
+}
+
+.slider p:nth-of-type(2) {
+  position: absolute;
+  left: 100%;
 }
